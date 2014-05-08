@@ -6,13 +6,21 @@ var archive = require('../helpers/archive-helpers');
 // var handleGet = function()
 
 var getIndex = function(req, res) {
-  utils.getFile('./public/index.html', function(data) {
+  utils.getFile(path.resolve(__dirname, './public/index.html'), function(data) {
     utils.sendResponse(res, data, 200);
   });
 };
 
 var postSite = function(req, res) {
-
+  utils.getFormData(req, function(data){ //siteName
+    //if data matches an item in archives, then we'll return it
+    //else
+      //append to sites.txt if not already there
+      //send loading.html as the response
+    utils.getSite(data, function(site){
+      utils.sendResponse(res, site, 200);
+    });
+  });
 };
 
 var methods = {

@@ -28,7 +28,7 @@ exports.initialize = function(pathsObj){
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
-exports.readListOfUrls = function(){
+exports.readListOfUrls = function(callback){
   // Read sites.txt
   // create array from splitting the lines on newline
 };
@@ -38,9 +38,10 @@ exports.isURLArchived = function(){
 };
 
 
-exports.downloadUrls = function(siteName){
+exports.downloadUrls = function(siteName, callback){
   request(siteName, function (error, response, body){
     if (!error && response.statusCode == 200) {
+      callback(body);
       console.log(body); // Print the google web page.
     }
   });

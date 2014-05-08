@@ -19,7 +19,7 @@ var postSite = function(req, res) {
       //send loading.html as the response
     // console.log()
     utils.getSite(data, function(site){
-      utils.sendResponse(res, site, 301);
+      utils.sendResponse(res, site, 302);
     });
   });
 };
@@ -34,7 +34,8 @@ exports.handleRequest = function (req, res) {
     if(method){
       method(req, res);
     } else {
-      res.end('404 ERROR');
+      // res.end('404 ERROR');
+      utils.sendResponse(res, '404 ERROR', 404);
     }
 };
 

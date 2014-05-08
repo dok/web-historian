@@ -65,7 +65,7 @@ exports.appendSite = function(siteName, callback){
       if (data.indexOf(siteName) !== -1){
         return true;
       }else{
-        fs.appendFile(sitePath, siteName);
+        fs.appendFile(sitePath, siteName + '\n');
       }
     });
 };

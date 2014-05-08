@@ -1,3 +1,4 @@
 www.google.com
-testing.com
-www.example.com
+www.microsoft.com
+www.twitter.com
+www.myspace.com

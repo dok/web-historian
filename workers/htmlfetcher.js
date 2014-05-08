@@ -8,9 +8,11 @@ var fetchSites = function() {
   helper.readListOfUrls(function(list) {
     //for each item in list,
     for(var i = 0; i < list.length; i++) {
+      debugger;
       var item = list[i];
       //check if is archived
-      helper.isUrlArchived(item, function(isArchived){
+      helper.isURLArchived(item, function(item, isArchived){
+        debugger;
         var regex = /^http:\/\//;
         //if is not archived, then scrape page
         if(!isArchived) {
@@ -19,7 +21,7 @@ var fetchSites = function() {
             var urlPath = "http://" + item;
           }
           //download the item
-          helper.downloadUrls(urlPath, function(body){
+          helper.downloadUrls(urlPath, function(item, body){
             //create a file and add the body
             helper.createFile(item, helper.paths.archivedSites, body);
           });

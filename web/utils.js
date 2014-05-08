@@ -11,6 +11,7 @@ var headers = {
 };
 
 exports.sendResponse = function(res, data, status) {
+  console.log("DATA IN SENDRESPONSE: ", data);
   status = status || 200;
   res.writeHead(status, headers);
   res.end(data);
@@ -44,9 +45,10 @@ exports.getSite = function(siteName, callback){
       //serve loading.html
         var sitePath = path.resolve(__dirname, './public/loading.html');
         exports.getFile(sitePath, callback);
-      }
+      } else {
       //send, actual site
         callback(data);
+      }
     });
 };
 
@@ -58,9 +60,9 @@ exports.appendSite = function(siteName, callback){
   exports.getFile(sitePath,
     function(data){
       data = data+"";
-      debugger;
+      // debugger;
       // if(typeof data === 'string'){console.log("DATA IS A STRING");}
-      if (data.contains(siteName)){
+      if (data.indexOf(siteName) !== -1){
         return true;
       }else{
         fs.appendFile(sitePath, siteName);

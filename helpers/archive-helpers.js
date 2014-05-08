@@ -1,6 +1,9 @@
 var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
+var http = require('http');
+var url = require('url');
+var request = require('request');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -26,16 +29,29 @@ exports.initialize = function(pathsObj){
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(){
-};
-
-exports.isUrlInList = function(){
-};
-
-exports.addUrlToList = function(){
+  // Read sites.txt
+  // create array from splitting the lines on newline
 };
 
 exports.isURLArchived = function(){
+  // Check to see if a URL has already been archived in archives/sites
 };
 
-exports.downloadUrls = function(){
+
+exports.downloadUrls = function(siteName){
+  request(siteName, function (error, response, body){
+    if (!error && response.statusCode == 200) {
+      console.log(body); // Print the google web page.
+    }
+  });
 };
+
+
+exports.createFile = function(fileName, path, data){
+  fs.writeFile(path+'/'+url.parse(fileName).hostname, data, function(err){
+    if(err) throw err;
+    console.log("New Archive File Saved!");
+  });
+};
+
+

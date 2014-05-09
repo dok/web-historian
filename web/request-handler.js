@@ -18,9 +18,8 @@ var postSite = function(req, res) {
       //append to sites.txt if not already there
       //send loading.html as the response
     // console.log()
-    utils.getSite(data, function(site){
-      utils.sendResponse(res, site, 302);
-    });
+    utils.appendSite(data);
+    utils.sendRedirect(res, data);
   });
 };
 

@@ -19,10 +19,16 @@ exports.serveAssets = function(res, fileName, failback) {
   //  404
   fs.readFile('./public' + fileName, function(err, data) {
     if(err) {
-      failback();
+      fs.readFile('../archives/sites'+fileName, function(err, data){
+        if(err){
+          failback();
+        }
+        data += "";
+        utils.sendResponse(res, data, 201);
+      });
+    }else{
+      utils.sendResponse(res, data, 201, mime.lookup(fileName));
     }
-
-    utils.sendResponse(res, data, 201, mime.lookup(fileName));
   });
 
 };

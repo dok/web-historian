@@ -1,6 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
+var _ = require('underscore');
+
 var headers = {
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -9,11 +11,16 @@ var headers = {
 };
 
 exports.sendResponse = function(res, data, status, mime) {
-  console.log("DATA IN SENDRESPONSE: ", data);
   status = status || 200;
   headers['Content-Type'] = mime || "text/html";
   res.writeHead(status, headers);
   res.end(data);
+};
+
+exports.sendRedirect = function(res, path){
+  var header = _.extend({location: '/'+path}, headers);
+  res.writeHead(301, header);
+  res.end();
 };
 
 exports.getFile = function(path, callback) {
@@ -67,5 +74,8 @@ exports.appendSite = function(siteName, callback){
       }
     });
 };
+
+
+
 
 

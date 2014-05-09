@@ -2,3 +2,11 @@ www.google.com
 www.microsoft.com
 www.twitter.com
 www.myspace.com
+www.reddit.com
+www.msnbc.com
+www.hbo.com
+www.mangastream.com
+www.facebook.com
+www.youtube.com
+www.instagram.com
+www.s.com

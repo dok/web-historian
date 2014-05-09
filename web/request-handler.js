@@ -1,6 +1,8 @@
 var path = require('path');
 var utils = require('./utils');
 var archive = require('../helpers/archive-helpers');
+var fs = require('fs');
+var httpHelper = require('./http-helpers.js');
 // require more modules/folders here!
 
 // var handleGet = function()
@@ -18,8 +20,16 @@ var postSite = function(req, res) {
       //append to sites.txt if not already there
       //send loading.html as the response
     // console.log()
+    //
+    //
     utils.appendSite(data);
-    utils.sendRedirect(res, data);
+    fs.exists('../archives/sites/'+data, function(exists){
+      if(exists){
+        utils.sendRedirect(res, data);
+      }else{
+        utils.sendRedirect(res, 'loading.html');
+      }
+    });
   });
 };
 
@@ -38,3 +48,8 @@ exports.handleRequest = function (req, res) {
     }
 };
 
+exports.handleLoader = function (req, res) {
+  httpHelper.serveAssets(res, "/loading.html", function(){
+    utils.sendResponse(res, "404 Page Doesn't Exist", 404);
+  });
+};
